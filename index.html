@@ -1,0 +1,116 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Weather App</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAR8DpdW2blG5ijSbgW0zRZ8401M0b8w80&libraries=places&callback=initMap" async defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/moment.min.js"></script>
+	<script src="scripts/Location.js"></script>
+    <style>
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+			width: 100%;
+			border: 1px solid #ddd;
+			font-weight: bold;
+		}
+
+		th, td {
+			text-align: left;
+			padding: 16px;
+		}
+		tr:nth-child(even) {
+			background-color: #f2f2f2
+		}
+	</style>
+</head>
+<body>	
+ <script>
+	
+	getLocation();
+	function getLocation() {
+    //get location using navigator
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        alert("Geolocation not supported");
+    }
+}
+    function initMap() {
+			  
+			  doC('city');
+			  doC('city1');
+			  doC('city2');
+			  doC('city3');
+
+	};
+	
+	function doC(ci){
+		var city = document.getElementById(ci);
+			   var autocomplete = new google.maps.places.Autocomplete(city);
+			  
+			  google.maps.event.addListener(autocomplete, 'place_changed', function() {
+				var lat = autocomplete.getPlace().geometry.location.lat();
+				var long = autocomplete.getPlace().geometry.location.lng();
+				
+			  });
+	}
+	
+	
+			
+			
+	
+
+	</script>
+	
+	<div id="page1" data-role='page' data-theme="a">     
+		
+		<div class="wrapper">
+		    <a href="#page2" onclick="initGoogle()" class="ui-btn">Compare Cities</a>
+			<input type="text" name="city" id="city" >
+			<button onclick="searchCity()">Search</button>
+			
+			<canvas id="myChart"></canvas>
+			
+			<div id="weather"></div>
+		</div>
+		
+		<div data-role='footer' data-position='fixed' >
+		  <h2>Footer</h2>
+		</div>
+	</div>
+	<div id="page2" data-role='page' data-theme="a">     
+		
+		<div class="wrapper">
+			<input  type="text" name="city1" id="city1" >
+			<input type="text" name="city2" id="city2" >
+			<input  type="text" name="city3" id="city3" >
+			<button onclick="compareCity()">Compare</button>
+			
+			<div style="width:75%;">
+				<canvas id="myChart1"></canvas>
+			</div>	
+			<div id="weather1"></div>
+			<br><br>
+			<div id="weather2"></div>
+			<br><br>
+			<div id="weather3"></div>
+			
+			<div id="rain"></div>
+		</div>
+		
+		
+	</div>
+	<script>
+	
+	</script>
+	
+	
+</body>
+</html>	
